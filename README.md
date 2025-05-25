@@ -1,6 +1,8 @@
 # Konfigurasi-OSPF-Redistribution-dan-Route-Filtering-di-Cisco
 
+### Topology
 
+![Topologi](image/Topologi.png)
 
 ### IP ADDRESS TABLE
 
