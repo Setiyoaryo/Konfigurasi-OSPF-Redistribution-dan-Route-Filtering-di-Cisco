@@ -265,9 +265,15 @@ R-4(config-router) exit
 ### VERIFICATION
 Setelah konfigurasi route redistribution dan route filtering selesai dilakukan, langkah selanjutnya adalah melakukan proses verifikasi untuk memastikan bahwa konfigurasi telah berjalan sesuai dengan yang diharapkan. Verifikasi ini bertujuan untuk memastikan bahwa rute yang di-redistribusikan telah diterima dengan benar oleh router tujuan, dan bahwa filtering berfungsi sebagaimana mestinya sesuai dengan kebijakan yang telah ditetapkan.
 
+#### ROUTING TABLE
 
+![TOPOLOGI](Image/REDIS.png)
 
+Dari output di atas, terlihat bahwa route redistribution telah berhasil diterapkan sesuai dengan kebijakan route filtering yang dikonfigurasi. Hal ini dibuktikan dengan tidak munculnya network 10.0.0.4/32 di routing table, sesuai dengan filter yang diterapkan.
 
+Terdapat beberapa entri dengan flag O E1, yang menunjukkan bahwa connected network telah berhasil di-redistribusi menggunakan OSPF external type 1. Selain itu, terlihat pula satu entri dengan flag O E2, yang menandakan bahwa static route juga berhasil didistribusikan sebagai OSPF external type 2.
+
+#### LSDB
 
 
 
