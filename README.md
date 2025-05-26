@@ -267,7 +267,7 @@ Setelah konfigurasi route redistribution dan route filtering selesai dilakukan, 
 
 #### ROUTING TABLE
 
-![TOPOLOGI](Image/REDIS.png)
+![REDIS](Image/REDIS.png)
 
 Dari output di atas, terlihat bahwa route redistribution telah berhasil diterapkan sesuai dengan kebijakan route filtering yang dikonfigurasi. Hal ini dibuktikan dengan tidak munculnya network 10.0.0.4/32 di routing table, sesuai dengan filter yang diterapkan.
 
@@ -275,7 +275,20 @@ Terdapat beberapa entri dengan flag O E1, yang menunjukkan bahwa connected netwo
 
 #### LSDB
 
+![LSDB](Image/LSDB.png)
 
+Redistribusi dilakukan di router 10.0.0.4 untuk memasukkan prefix dari static route dan connected route ke dalam domain OSPF sebagai Type-5 AS External LSA. Dengan bantuan route filtering menggunakan prefix-list dan route-map, hanya prefix yang diizinkan saja yang masuk ke LSDB dan disebarkan ke router-router lain di jaringan. Output dari perintah show ip ospf database menunjukkan bahwa redistribusi dan filtering berjalan sesuai harapan—hanya LSA untuk prefix yang di-permit yang muncul di database.
+
+#### PING & TRACEROUTE
+
+![TOPOLOGI](Image/ping-pc.png)
+
+
+![TOPOLOGI](Image/TRACE-R5.png)
+
+#### DEFAULT ROUTE
+
+![default](Image/default information.png)
 
 
 
