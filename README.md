@@ -300,6 +300,8 @@ Setelah memastikan bahwa default route telah terdistribusi ke seluruh router dal
 
 ### FINAL THOUGHTS
 
+Terima kasih telah meluangkan waktu untuk melihat dokumentasi belajar saya terkait konfigurasi OSPF Redistribution dan Route Filtering di Cisco ini. Repository ini dibuat sebagai sarana eksperimen dan pembelajaran pribadi, sehingga konfigurasi yang ada tidak dimaksudkan sebagai best practice yang siap diterapkan langsung di lingkungan produksi. Semoga konten ini bisa memberikan gambaran dan inspirasi bagi kalian yang juga ingin mendalami topik serupa. Jangan ragu untuk mencoba dan mengembangkan lebih lanjut sesuai kebutuhan kalian!
+
 
 
 
