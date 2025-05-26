@@ -149,7 +149,9 @@ R-5(config)
 ```
 
 ### OSPF CONFIGURATION
-Setelah seluruh perangkat dikonfigurasi dengan IP Address masing-masing, langkah selanjutnya adalah melakukan konfigurasi OSPF. Proses dimulai dengan membangun peering antar-neighbor sebelum melanjutkan ke tahap konfigurasi redistribusi dan route filtering. Di router 1 saya menambahkan perintah `default-information originate metric-type 1` yang berfungsi untuk mendistribusikan default gateway ke seluruh jaringan OSPF. Dalam konfigurasi ini, saya menggunakan metric type 1 (setara dengan if-installed pada perangkat Mikrotik)
+Setelah seluruh perangkat dikonfigurasi dengan IP Address masing-masing, langkah selanjutnya adalah melakukan konfigurasi OSPF. Proses dimulai dengan membangun peering antar-neighbor sebelum melanjutkan ke tahap konfigurasi redistribusi dan route filtering. Di router 1, saya menambahkan perintah default-information originate metric-type 1 yang berfungsi untuk mendistribusikan default gateway ke seluruh jaringan OSPF. Dalam konfigurasi ini, saya menggunakan metric-type 1 agar default route mempertimbangkan total cost dari jalur OSPF.
+
+Perlu dicatat bahwa perintah ini hanya akan melakukan advertise default route jika default route (0.0.0.0/0) sudah tersedia di routing table — konsep ini serupa dengan opsi if-installed di MikroTik.
 
 #### Router 1 <--> Router 2
 ```Bash
@@ -279,16 +281,26 @@ Terdapat beberapa entri dengan flag O E1, yang menunjukkan bahwa connected netwo
 
 Redistribusi dilakukan di router 10.0.0.4 untuk memasukkan prefix dari static route dan connected route ke dalam domain OSPF sebagai Type-5 AS External LSA. Dengan bantuan route filtering menggunakan prefix-list dan route-map, hanya prefix yang diizinkan saja yang masuk ke LSDB dan disebarkan ke router-router lain di jaringan. Output dari perintah show ip ospf database menunjukkan bahwa redistribusi dan filtering berjalan sesuai harapan—hanya LSA untuk prefix yang di-permit yang muncul di database.
 
+#### DEFAULT ROUTE
+
+![TOPOLOGI](Image/dev.png)
+
+Dari gambar di atas, terlihat bahwa default route telah terdistribusi dengan baik ke seluruh jaringan OSPF. Default route tersebut berasal dari konfigurasi perintah default-information originate yang diterapkan pada router 1.
+
+
+
 #### PING & TRACEROUTE
+
+Setelah memastikan bahwa default route telah terdistribusi ke seluruh router dalam jaringan OSPF, langkah verifikasi terakhir dilakukan dengan pengujian konektivitas menggunakan ping dan traceroute. Pada gambar, pengujian dilakukan dari PC yang terhubung ke network di router 5, serta dilakukan traceroute langsung dari router 5 untuk memastikan jalur yang dilalui sesuai dengan ekspektasi.
 
 ![TOPOLOGI](Image/ping-pc.png)
 
 
 ![TOPOLOGI](Image/TRACE-R5.png)
 
-#### DEFAULT ROUTE
+### FINAL THOUGHTS
 
-![default](Image/default information.png)
+
 
 
 
